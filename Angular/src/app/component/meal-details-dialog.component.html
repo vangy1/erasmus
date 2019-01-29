@@ -1,0 +1,18 @@
+<div *ngIf="meal.pictureUrl else noPicture" class="meal-with-picture-container">
+  <div class="meal-with-picture-container" fxLayout="row" fxLayoutGap="48px">
+    <div class="meal-picture-container" fxFlex="50" fxLayoutAlign="center center">
+      <img [src]="meal.pictureUrl" class="meal-picture"/>
+    </div>
+    <div class="meal-info-container" fxFlex="50" fxLayout="column" fxLayoutGap="16px">
+      <h1 class="meal-name">{{meal.name}}</h1>
+      <p class="meal-description">{{meal.description}}</p>
+    </div>
+  </div>
+</div>
+
+<ng-template #noPicture>
+  <div fxLayout="column" fxLayoutGap="16px" fxLayoutAlign="center center" class="meal-without-picture-container">
+    <h1 class="meal-name">{{meal.name}}</h1>
+    <p class="meal-description">{{meal.description}}</p>
+  </div>
+</ng-template>

@@ -1,0 +1,42 @@
+@media screen and (max-width: 880px) {
+  .credentials-input {
+    font-size: 28px;
+  }
+
+  .button-signin {
+    height: 50px;
+    font-size: 22px;
+  }
+
+
+  .login-container-content {
+    padding: 16px 22px;
+  }
+}
+
+.login-container {
+  background-color: whitesmoke;
+  width: 400px;
+  margin: 200px auto 0;
+}
+
+.login-container-content {
+  padding: 10px 16px;
+}
+
+
+.button-signin {
+  color: white;
+  margin-top: 36px;
+}
+
+
+.mat-form-field-password {
+  margin-top: 12px;
+}
+
+.auth-fail {
+  text-align: center;
+  color: red;
+  margin-top: 16px;
+}

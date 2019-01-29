@@ -1,0 +1,3 @@
+<app-login *ngIf="authenticationService.authentication === authentication.GUEST"></app-login>
+<app-admin *ngIf="authenticationService.authentication === authentication.ADMIN"></app-admin>
+<app-voter *ngIf="authenticationService.authentication === authentication.VOTER"></app-voter>

@@ -1,0 +1,26 @@
+<div fxLayout="column" fxLayoutAlign=" center" fxLayoutGap="18px">
+  <div fxLayout="row" fxLayoutAlign=" center" fxLayoutGap="24px">
+    <mat-form-field class="form-field-no-bottom-padding form-field-no-top-border" color="accent">
+      <input [(ngModel)]=" this.meal.name" matInput placeholder="Meal name">
+    </mat-form-field>
+    <button (click)="picture.click()" *ngIf="!pictureUpload" class="upload-meal-image-button" color="accent" mat-button>
+      Upload meal image
+    </button>
+    <mat-progress-bar *ngIf="pictureUpload && uploadProgress != 100" [value]="uploadProgress"
+                      class="upload-meal-image-progress-bar" mode="determinate"></mat-progress-bar>
+    <div *ngIf="uploadProgress == 100" class="upload-meal-image-success-container" fxLayout="row"
+         fxLayoutAlign="center center">
+      <img class="upload-meal-image-success" src="/assets/success-upload.svg"/>
+    </div>
+  </div>
+  <mat-form-field class="meal-description form-field-no-bottom-padding form-field-no-top-border" color="accent">
+    <textarea [(ngModel)]=" this.meal.description" matInput placeholder="Meal description"></textarea>
+  </mat-form-field>
+  <button (click)="createMeal()" [disabled]="!meal.name" class="create-meal-button" color="accent" mat-raised-button>
+    Create new meal
+  </button>
+</div>
+
+<input hidden #picture type="file" id="picture" name="picture" (change)="uploadPicture()" accept="image/*"/>
+
+

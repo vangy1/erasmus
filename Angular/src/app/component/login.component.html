@@ -1,0 +1,14 @@
+<mat-card class="login-container">
+  <div class="login-container-content" fxLayout="column">
+    <mat-form-field class="form-field-no-bottom-padding form-field-no-top-border mat-form-field-login" color="accent">
+      <input [(ngModel)]="this.username" class="credentials-input" matInput placeholder="Username">
+    </mat-form-field>
+    <mat-form-field class="form-field-no-bottom-padding mat-form-field-login mat-form-field-password" color="accent">
+      <input [(ngModel)]="this.password" class="credentials-input" matInput placeholder="Password" type="password">
+    </mat-form-field>
+    <button (click)="login()" [disabled]="!username || !password" class="button-signin" color="accent"
+            mat-raised-button>Sign in
+    </button>
+    <span *ngIf="authFail" class="auth-fail">Username or password is incorrect</span>
+  </div>
+</mat-card>

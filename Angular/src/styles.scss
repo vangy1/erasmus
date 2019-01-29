@@ -1,1 +1,129 @@
-/* You can add global styles to this file, and also import other style files */
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+
+
+body {
+  font-family: 'Lato', sans-serif;
+  background-color: #9E9E9E;
+  color: #FFFFFF;
+}
+
+span {
+}
+
+.container {
+  padding: 32px 0;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.container {
+  width: 95%;
+}
+
+.form-field-no-top-border .mat-form-field-infix {
+  border-top: 0px !important;
+}
+
+.mat-card-decreased-padding {
+  padding: 16px 6px 16px 16px !important;
+}
+
+.mat-card-no-padding {
+  padding: 0px !important;
+}
+
+
+.red-icon svg {
+  fill: #B80000;
+}
+
+.dialog-without-padding .mat-dialog-container {
+  padding: 0;
+}
+
+@media screen and (max-width: 880px) {
+
+  .mat-form-field-login label {
+    font-size: 22px !important;
+  }
+}
+
+/*md*/
+@media screen and (min-width: 960px) {
+
+  .container {
+    width: 915px;
+  }
+}
+
+/*lg*/
+@media screen and (min-width: 1280px) {
+  .container {
+    width: 1100px;
+  }
+}
+
+/*xl*/
+@media screen and (min-width: 1920px) {
+  .container {
+    width: 1200px;
+  }
+}
+
+.form-field-no-bottom-padding .mat-form-field-wrapper {
+  padding-bottom: 0px !important;
+}
+
+.form-field-no-bottom-padding .mat-form-field-underline {
+  bottom: 0px !important;
+}
+
+.mat-select-white .mat-select-value-text {
+  color: white !important;
+}
+
+
+.snackbar-without-action .mat-simple-snackbar {
+  text-transform: uppercase;
+  font-weight: bold;
+  justify-content: center;
+  color: white;
+}
+
+input[type="color"],
+input[type="date"],
+input[type="datetime"],
+input[type="datetime-local"],
+input[type="email"],
+input[type="month"],
+input[type="number"],
+input[type="password"],
+input[type="search"],
+input[type="tel"],
+input[type="text"],
+input[type="time"],
+input[type="url"],
+input[type="week"],
+select:focus,
+textarea {
+  font-size: 16px;
+}

@@ -1,0 +1,120 @@
+<section class="primary-section voting-section">
+  <ng-container *ngIf="adminService.currentVoting else noVotingInProgress">
+    <span class="title-container" fxLayout="row" fxLayoutAlign="center center">
+        <span class="title">Current voting</span>
+      <button (click)="authenticationService.signOut()" class="auth-button" fxFlex="auto" mat-button>Sign out</button>
+    </span>
+
+    <div class="voting-details" fxLayout="column" fxLayoutAlign="center center">
+      <span class="text overflow-protection voting-details">{{adminService.currentVoting.mealName}}</span>
+      <span class="text voting-details">{{adminService.currentVoting.dateOfTheMeal.getDate()}}
+        .{{adminService.currentVoting.dateOfTheMeal.getMonth() + 1}}
+        .{{adminService.currentVoting.dateOfTheMeal.getFullYear()}} / <span
+          *ngIf="adminService.currentVoting.rating"><span
+          class="text-emphasized">{{adminService.currentVoting.rating}}</span> / </span>
+        <span class="text-emphasized">{{adminService.currentVoting.voteCount}}</span> Votes</span>
+
+    </div>
+
+    <div class="vote-section" fxLayout="row" fxLayoutAlign="space-between">
+      <button (click)="selectRating('1')" [color]="getColor('1')" class="vote-button" mat-fab><span class="button-text">1</span>
+      </button>
+      <button (click)="selectRating('2')" [color]="getColor('2')" class="vote-button" mat-fab><span class="button-text">2</span>
+      </button>
+      <button (click)="selectRating('3')" [color]="getColor('3')" class="vote-button" mat-fab><span class="button-text">3</span>
+      </button>
+      <button (click)="selectRating('4')" [color]="getColor('4')" class="vote-button" mat-fab><span class="button-text">4</span>
+      </button>
+      <button (click)="selectRating('5')" [color]="getColor('5')" class="vote-button" mat-fab><span class="button-text">5</span>
+      </button>
+    </div>
+  </ng-container>
+
+  <ng-template #noVotingInProgress>
+    <span class="title-container" fxLayout="row" fxLayoutAlign="center center">
+      <span class="title">There is currently no voting in progress</span>
+    <button (click)="authenticationService.signOut()" class="auth-button" fxFlex="auto" mat-button>Sign out</button>
+    </span>
+  </ng-template>
+</section>
+
+<div class="section-separator"></div>
+
+<section class="primary-section past-votings-section">
+  <div fxLayout="row" fxLayoutAlign="center">
+    <h1 class="title">Past votings</h1>
+  </div>
+
+  <div fxLayout="column" fxLayoutGap="8px" class="content">
+    <div class="content" fxLayout="column" fxLayoutGap="8px">
+      <div fxLayout="row" fxLayoutAlign=" center"
+           *ngFor="let voting of adminService.votingHistory | slice:0:getVotingHistoryExpanded(); let i=index">
+        <span fxFlex="15" class="voting-date">{{voting.dateOfTheMeal.getDate()}}.{{voting.dateOfTheMeal.getMonth() + 1}}
+          .{{voting.dateOfTheMeal.getFullYear()}}</span>
+        <span fxFlex="60" class="voting-meal-name overflow-protection">{{voting.mealName}}</span>
+        <span fxFlex="10" class="voting-rating">{{voting.rating}}</span>
+        <span fxFlex="15" class="voting-vote-count"><span class="vote-count-emphasized">{{voting.voteCount}}</span> votes</span>
+      </div>
+    </div>
+  </div>
+  <div class="expand-button" fxLayoutAlign="center center" *ngIf="adminService.votingHistory.length > 5">
+    <button (click)="votingHistoryExpanded = !votingHistoryExpanded" mat-icon-button>
+      <mat-icon [svgIcon]="votingHistoryExpanded ? 'expand-less' : 'expand-more'"></mat-icon>
+    </button>
+  </div>
+</section>
+
+<div class="section-separator"></div>
+
+<section class="primary-section meals-section">
+  <div fxLayout="row" fxLayoutAlign="center">
+    <h1 class="title">Meals</h1>
+  </div>
+
+  <div class="content">
+    <div fxLayout="column" fxLayoutGap="20px">
+      <div fxLayout="row" fxLayoutAlign="space-between"
+           *ngFor="let mealGroup of adminService.mealsLayout | slice:0:getMealsExpanded(); let i=index">
+        <ng-container *ngFor="let meal of mealGroup">
+          <mat-card class="card meal-details-container" *ngIf="meal.name else emptyDiv" fxFlex="49" fxLayout="row"
+                    fxLayoutAlign=" center" (click)="openMealDetailsDialog(meal)">
+            <span class="meal-name overflow-protection" fxFlex="100">{{meal.name}}</span>
+            <span class="rating" fxFlex="auto">4.8</span>
+          </mat-card>
+          <ng-template #emptyDiv>
+            <div class="empty-card-mock" fxFlex="50">
+            </div>
+          </ng-template>
+        </ng-container>
+      </div>
+    </div>
+  </div>
+  <div class="expand-button" fxLayoutAlign="center center" *ngIf="adminService.mealsLayout.length > 5">
+    <button (click)="mealsExpanded = !mealsExpanded" mat-icon-button>
+      <mat-icon [svgIcon]="mealsExpanded ? 'expand-less' : 'expand-more'"></mat-icon>
+    </button>
+  </div>
+</section>
+
+<div class="section-separator"></div>
+
+<section class="primary-section suggestions-section">
+  <div fxLayout="row" fxLayoutAlign=" center" fxLayoutGap="16px"
+       *ngIf="!suggestionSubmitted  else suggestionConfirmation">
+    <h2 class="label">Give us a meal suggestion</h2>
+    <mat-form-field fxFlex="auto" color="accent" class="form-field-no-bottom-padding form-field-no-top-border">
+      <input class="input" [(ngModel)]="mealName" matInput>
+    </mat-form-field>
+    <button class="raised-button" mat-raised-button color="accent" (click)="createSuggestion()">Submit</button>
+  </div>
+  <ng-template #suggestionConfirmation>
+    <div fxLayoutAlign="center center">
+      <div fxLayoutAlign="center">
+      <span class="submitted-text">
+      Thank you for your suggestion
+    </span>
+      </div>
+    </div>
+  </ng-template>
+</section>
+

@@ -1,0 +1,133 @@
+<section class="primary-section manage-voting-section">
+  <span class="title-container" fxLayout="row" fxLayoutAlign="center center">
+    <span class="title">Manage voting</span><button (click)="authenticationService.signOut()" class="auth-button"
+                                                    fxFlex="auto" mat-button>Sign out</button>
+  </span>
+  <div class="content">
+    <div *ngIf="adminService.currentVoting else createVoting" class="manage-voting-content" fxLayout="row"
+         fxLayoutAlign=" center">
+      <h2 class="subtitle" fxFlex="20">Current voting</h2>
+      <div fxFlex="60" fxLayout="column">
+        <span class="text voting-details overflow-protection">{{adminService.currentVoting.mealName}}</span>
+        <span class="text voting-details voting-rating-votes"><span *ngIf="adminService.currentVoting.rating"
+                                                                    class="text-emphasized">{{adminService.currentVoting.rating}}
+          / </span><span class="text-emphasized">{{adminService.currentVoting.voteCount}}</span> Votes</span>
+      </div>
+
+      <div fxFlex="20" fxLayout="row" fxLayoutAlign="end center">
+        <button (click)="adminService.endVoting()" class="raised-button" color="accent" mat-raised-button>End</button>
+      </div>
+    </div>
+    <ng-template #createVoting>
+      <div fxLayout="row" fxLayoutAlign="space-between center">
+        <h2 class="subtitle" fxFlex="20">Create voting</h2>
+        <mat-form-field class="form-field-no-bottom-padding form-field-no-top-border" color="warn" fxFlex="60">
+          <mat-select [(ngModel)]="adminService.votingSelectedMealId" class="mat-select-white" placeholder="Meal">
+            <mat-option *ngFor="let mealName of adminService.meals" [value]="mealName.id">
+              {{mealName.name}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <div fxFlex="20" fxLayout="row" fxLayoutAlign="end center">
+          <button (click)="adminService.startVoting()" class="raised-button" color="accent" mat-raised-button>Start
+          </button>
+        </div>
+      </div>
+    </ng-template>
+  </div>
+
+</section>
+
+<div class="section-separator"></div>
+
+<section class="primary-section past-votings-section">
+  <div fxLayout="row" fxLayoutAlign="center">
+    <h1 class="title">Past votings</h1>
+  </div>
+
+  <div fxLayout="column" fxLayoutGap="8px" class="content">
+    <div fxLayout="row" fxLayoutAlign=" center"
+         *ngFor="let voting of adminService.votingHistory | slice:0:getVotingHistoryExpanded(); let i=index">
+      <span class="voting-date" fxFlex="15">
+        {{voting.dateOfTheMeal.getDate()}}.{{voting.dateOfTheMeal.getMonth() + 1}}
+        .{{voting.dateOfTheMeal.getFullYear()}}</span>
+      <span class="voting-meal-name overflow-protection" fxFlex="60">{{voting.mealName}}</span>
+      <span class="voting-rating" fxFlex="10">{{voting.rating}}</span>
+      <span class="voting-vote-count" fxFlex="15">
+        <span class="vote-count-emphasized">{{voting.voteCount}}</span> votes</span>
+      <button class="voting-button-delete" (click)="deleteVoting(voting.id)" mat-icon-button>
+        <mat-icon class="red-icon" svgIcon="delete-forever"></mat-icon>
+      </button>
+    </div>
+  </div>
+
+  <div class="expand-button" fxLayoutAlign="center center" *ngIf="adminService.votingHistory.length > 5">
+    <button (click)="votingHistoryExpanded = !votingHistoryExpanded" mat-icon-button>
+      <mat-icon [svgIcon]="votingHistoryExpanded ? 'expand-less' : 'expand-more'"></mat-icon>
+    </button>
+  </div>
+</section>
+
+<div class="section-separator"></div>
+
+<section class="primary-section meals-section">
+  <div fxLayout="row" fxLayoutAlign="center">
+    <h1 class="title">Meals</h1>
+  </div>
+
+  <div class="content">
+    <div fxLayout="row" fxLayoutAlign="center" class="button-manage-meals">
+      <button mat-raised-button color="accent" class="raised-button" (click)="openDialog()">Manage meals</button>
+    </div>
+
+    <div fxLayout="column" fxLayoutGap="20px">
+      <div fxLayout="row" fxLayoutAlign="space-between"
+           *ngFor="let mealGroup of adminService.mealsLayout | slice:0:getMealsExpanded(); let i=index">
+        <ng-container *ngFor="let meal of mealGroup">
+          <mat-card *ngIf="meal.name else emptyDiv" class="card mat-card-no-padding" fxFlex="49" fxLayout="row"
+                    fxLayoutAlign=" center">
+            <span fxFlex="100" class="meal-name meal-details-container overflow-protection"
+                  (click)="openMealDetailsDialog(meal)">{{meal.name}}</span>
+            <span fxFlex="auto" class="rating">{{meal.rating}}</span>
+            <button fxFlex="auto" class="button-meal-delete" (click)="deleteMeal(meal)" mat-icon-button>
+              <mat-icon class="red-icon" svgIcon="delete-forever"></mat-icon>
+            </button>
+          </mat-card>
+          <ng-template #emptyDiv>
+            <div class="empty-card-mock" fxFlex="50">
+            </div>
+          </ng-template>
+        </ng-container>
+      </div>
+    </div>
+    <div class="expand-button" fxLayoutAlign="center center" *ngIf="adminService.mealsLayout.length > 5">
+      <button (click)="mealsExpanded = !mealsExpanded" mat-icon-button>
+        <mat-icon [svgIcon]="mealsExpanded ? 'expand-less' : 'expand-more'"></mat-icon>
+      </button>
+    </div>
+  </div>
+</section>
+
+<div class="section-separator"></div>
+
+<section class="primary-section suggestions-section">
+  <div fxLayout="row" fxLayoutAlign="center">
+    <h1 class="title">Suggestions</h1>
+  </div>
+
+  <div fxLayout="column" fxLayoutGap="20px" class="content">
+    <mat-card *ngFor="let suggestion of adminService.suggestions | slice:0:getSuggestionsExpanded(); let i=index"
+              class="card mat-card-decreased-padding" fxLayout="row" fxLayoutAlign=" center">
+      <span class="suggestion-username">{{suggestion.username}}</span>
+      <span class="suggestion-meal-name overflow-protection" fxFlex="auto">{{suggestion.mealName}}</span>
+      <button (click)="deleteSuggestion(suggestion.id)" mat-icon-button>
+        <mat-icon class="red-icon" svgIcon="delete-forever"></mat-icon>
+      </button>
+    </mat-card>
+  </div>
+  <div class="expand-button" fxLayoutAlign="center center" *ngIf="adminService.suggestions.length > 5">
+    <button (click)="suggestionsExpanded = !suggestionsExpanded" mat-icon-button>
+      <mat-icon [svgIcon]="suggestionsExpanded ? 'expand-less' : 'expand-more'"></mat-icon>
+    </button>
+  </div>
+</section>

@@ -3,20 +3,53 @@
 @include mat-core();
 
 $md-primary: (
-  50 : #eff3fa,
-  100 : #d8e0f2,
-  200 : #becbea,
-  300 : #a3b6e1,
-  400 : #90a7da,
-  500 : #7c97d4,
-  600 : #748fcf,
-  700 : #6984c9,
-  800 : #5f7ac3,
-  900 : #4c69b9,
+  50 : #f3f3f3,
+  100 : #e2e2e2,
+  200 : #cfcfcf,
+  300 : #bbbbbb,
+  400 : #adadad,
+  500 : #9e9e9e,
+  600 : #969696,
+  700 : #8c8c8c,
+  800 : #828282,
+  900 : #707070,
+  A100 : #fef3f3,
+  A200 : #f9c5c5,
+  A400 : #ff8b8b,
+  A700 : #ff7272,
+  contrast: (
+    50 : #000000,
+    100 : #000000,
+    200 : #000000,
+    300 : #000000,
+    400 : #000000,
+    500 : #000000,
+    600 : #000000,
+    700 : #000000,
+    800 : #000000,
+    900 : #ffffff,
+    A100 : #000000,
+    A200 : #000000,
+    A400 : #000000,
+    A700 : #000000,
+  )
+);
+
+$md-accent: (
+  50 : #e8f4fe,
+  100 : #c6e4fc,
+  200 : #a1d2fa,
+  300 : #7bc0f8,
+  400 : #5eb3f7,
+  500 : #42a5f5,
+  600 : #3c9df4,
+  700 : #3393f2,
+  800 : #2b8af0,
+  900 : #1d79ee,
   A100 : #ffffff,
-  A200 : #e2e9ff,
-  A400 : #afc3ff,
-  A700 : #96b0ff,
+  A200 : #f0f6ff,
+  A400 : #bdd8ff,
+  A700 : #a3c9ff,
   contrast: (
     50 : #000000,
     100 : #000000,
@@ -35,42 +68,43 @@ $md-primary: (
   )
 );
 
-$md-accent: (
-  50 : #e4e6ec,
-  100 : #bdc2cf,
-  200 : #9199af,
-  300 : #64708f,
-  400 : #435177,
-  500 : #22325f,
-  600 : #1e2d57,
-  700 : #19264d,
-  800 : #141f43,
-  900 : #0c1332,
-  A100 : #6e85ff,
-  A200 : #3b5aff,
-  A400 : #0830ff,
-  A700 : #0026ed,
+$md-warn: (
+  50 : #eeeeee,
+  100 : #d6d6d6,
+  200 : #bababa,
+  300 : #9e9e9e,
+  400 : #8a8a8a,
+  500 : #757575,
+  600 : #6d6d6d,
+  700 : #626262,
+  800 : #585858,
+  900 : #454545,
+  A100 : #f6afaf,
+  A200 : #f18282,
+  A400 : #ff4141,
+  A700 : #ff2727,
   contrast: (
     50 : #000000,
     100 : #000000,
     200 : #000000,
-    300 : #ffffff,
-    400 : #ffffff,
+    300 : #000000,
+    400 : #000000,
     500 : #ffffff,
     600 : #ffffff,
     700 : #ffffff,
     800 : #ffffff,
     900 : #ffffff,
     A100 : #000000,
-    A200 : #ffffff,
+    A200 : #000000,
     A400 : #ffffff,
     A700 : #ffffff,
   )
 );
 
+
 $primary-primary: mat-palette($md-primary);
 $primary-accent: mat-palette($md-accent);
-$primary-warn: mat-palette($mat-red);
+$primary-warn: mat-palette($md-warn);
 
 $primary-theme: mat-light-theme($primary-primary, $primary-accent, $primary-warn);
 @include angular-material-theme($primary-theme);
