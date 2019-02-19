@@ -9,6 +9,7 @@ import com.erasmus.db.repository.VoterRepository;
 import com.erasmus.db.repository.VotesRepository;
 import com.erasmus.dto.MealDto;
 import com.erasmus.dto.RaspberryDto;
+import com.erasmus.dto.UserDto;
 import com.erasmus.dto.VotingDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,10 +18,10 @@ import java.util.List;
 
 @Service
 public class RaspberryService {
-    CurrentVotingRepository currentVotingRepository;
-    VoterRepository voterRepository;
-    VotesRepository votesRepository;
-    UtilityService utilityService;
+    private CurrentVotingRepository currentVotingRepository;
+    private VoterRepository voterRepository;
+    private VotesRepository votesRepository;
+    private UtilityService utilityService;
 
     @Autowired
     public RaspberryService(CurrentVotingRepository currentVotingRepository, VoterRepository voterRepository, VotesRepository votesRepository, UtilityService utilityService) {
@@ -38,6 +39,10 @@ public class RaspberryService {
         }
 
         Meal meal = voting.getMeal();
+        return getRaspberryDto(voting, meal);
+    }
+
+    private RaspberryDto getRaspberryDto(Voting voting, Meal meal) {
         return new RaspberryDto(
                 new VotingDto(String.valueOf(voting.getId()), voting.getDateOfTheMeal().getTime(), voting.getMeal().getName(), utilityService.getRatingOfVoting(voting), String.valueOf(voting.getVotes().size())),
                 new MealDto(String.valueOf(meal.getId()), meal.getName(), meal.getPictureUrl(), meal.getDescription(), utilityService.getRatingOfMeal(meal)));
@@ -57,17 +62,23 @@ public class RaspberryService {
             if (userVote.getVoting().getId() == voting.getId()) {
                 userVote.setRating(Integer.parseInt(rating));
                 votesRepository.save(userVote);
-                return new RaspberryDto(
-                        new VotingDto(String.valueOf(voting.getId()), voting.getDateOfTheMeal().getTime(), voting.getMeal().getName(), utilityService.getRatingOfVoting(voting), String.valueOf(voting.getVotes().size())),
-                        new MealDto(String.valueOf(meal.getId()), meal.getName(), meal.getPictureUrl(), meal.getDescription(), utilityService.getRatingOfMeal(meal)));
+                return getRaspberryDto(voting, meal);
             }
         }
 
         votesRepository.save(new Vote(Integer.parseInt(rating), currentVotingRepository.findById(1).getVoting(), voter));
 
-        System.out.println("aaaa");
-        return new RaspberryDto(
-                new VotingDto(String.valueOf(voting.getId()), voting.getDateOfTheMeal().getTime(), voting.getMeal().getName(), utilityService.getRatingOfVoting(voting), String.valueOf(voting.getVotes().size())),
-                new MealDto(String.valueOf(meal.getId()), meal.getName(), meal.getPictureUrl(), meal.getDescription(), utilityService.getRatingOfMeal(meal)));
+        return getRaspberryDto(voting, meal);
+    }
+
+    public UserDto getUser(String authorization) {
+        Voter voter = voterRepository.findByChipId(authorization);
+        Vote vote = null;
+        for (Vote userVote : voter.getVotes()) {
+            if (userVote.getVoting().getId() == currentVotingRepository.findById(1).getVoting().getId()) {
+                vote = userVote;
+            }
+        }
+        return new UserDto(voter.getName(), vote != null ? String.valueOf(vote.getRating()) : null);
     }
 }

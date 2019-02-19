@@ -32,7 +32,7 @@
 
   <ng-template #noVotingInProgress>
     <span class="title-container" fxLayout="row" fxLayoutAlign="center center">
-      <span class="title">There is currently no voting in progress</span>
+      <span class="no-voting-in-progress title">There is currently no voting in progress</span>
     <button (click)="authenticationService.signOut()" class="auth-button" fxFlex="auto" mat-button>Sign out</button>
     </span>
   </ng-template>
@@ -79,7 +79,7 @@
           <mat-card class="card meal-details-container" *ngIf="meal.name else emptyDiv" fxFlex="49" fxLayout="row"
                     fxLayoutAlign=" center" (click)="openMealDetailsDialog(meal)">
             <span class="meal-name overflow-protection" fxFlex="100">{{meal.name}}</span>
-            <span class="rating" fxFlex="auto">4.8</span>
+            <span class="rating" fxFlex="auto">{{meal.rating}}</span>
           </mat-card>
           <ng-template #emptyDiv>
             <div class="empty-card-mock" fxFlex="50">

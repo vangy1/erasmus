@@ -23,99 +23,120 @@ public class MockDataController {
         this.userRepository = userRepository;
         this.suggestionRepository = suggestionRepository;
         this.currentVotingRepository = currentVotingRepository;
+//        testValueCreation();
     }
 
-    @GetMapping("/")
-    private String home() {
-        return "index";
-    }
 
     @GetMapping("/create")
     private String create() {
-        testValueCreation();
+//        testValueCreation();
         return "index";
     }
 
     private void testValueCreation() {
         Admin admin = new Admin();
         admin.setUsername("admin");
-        admin.setPassword("$2a$10$PPnnLSSEFKTXt0RDrAZy.e8tU4VGj4xDRhIyvRHaJ9t..IYM9uWCC");
+        admin.setPassword("$2a$10$PPnnLSSEFKTXt0RDrAZy.e8tU4VGj4xDRhIyvRHaJ9t..IYM9uWCC"); // 12345
         userRepository.save(admin);
 
         Voter voter1 = new Voter();
         voter1.setUsername("voter1");
-        voter1.setPassword("$2a$10$PPnnLSSEFKTXt0RDrAZy.e8tU4VGj4xDRhIyvRHaJ9t..IYM9uWCC");
+        voter1.setPassword("$2a$10$PPnnLSSEFKTXt0RDrAZy.e8tU4VGj4xDRhIyvRHaJ9t..IYM9uWCC"); // 12345
         voter1.setChipId("voter1chip");
         voter1.setName("Philip Portner");
         userRepository.save(voter1);
 
         Voter voter2 = new Voter();
         voter2.setUsername("voter2");
-        voter2.setPassword("$2a$10$PPnnLSSEFKTXt0RDrAZy.e8tU4VGj4xDRhIyvRHaJ9t..IYM9uWCC");
+        voter2.setPassword("$2a$10$PPnnLSSEFKTXt0RDrAZy.e8tU4VGj4xDRhIyvRHaJ9t..IYM9uWCC"); // 12345
         voter2.setChipId("voter2chip");
         voter2.setName("Amanda Sanders");
         userRepository.save(voter2);
 
         Voter voter3 = new Voter();
         voter3.setUsername("voter3");
-        voter3.setPassword("$2a$10$PPnnLSSEFKTXt0RDrAZy.e8tU4VGj4xDRhIyvRHaJ9t..IYM9uWCC");
+        voter3.setPassword("$2a$10$PPnnLSSEFKTXt0RDrAZy.e8tU4VGj4xDRhIyvRHaJ9t..IYM9uWCC"); // 12345
         voter3.setChipId("voter3chip");
         voter3.setName("William Reed");
         userRepository.save(voter3);
 
         Meal meal1 = new Meal();
         meal1.setName("Thai Peanut Chicken");
-        meal1.setDescription("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua." +
-                " Eu volutpat odio facilisis mauris. Donec massa sapien faucibus et molestie ac feugiat. Leo integer malesuada nunc vel risus commodo viverra." +
-                " Sem viverra aliquet eget sit amet. Suscipit tellus mauris a diam maecenas sed enim. Egestas congue quisque egestas diam in." +
-                " Dui nunc mattis enim ut tellus elementum sagittis vitae et. Eu lobortis elementum nibh tellus molestie." +
-                " Etiam dignissim diam quis enim. Dictum fusce ut placerat orci nulla pellentesque dignissim." +
-                " Interdum velit euismod in pellentesque. Amet purus gravida quis blandit. Turpis nunc eget lorem dolor sed viverra ipsum nunc.");
+        meal1.setDescription("INGREDIENTS:\n" +
+                "Lorem\n" +
+                "Ipsum\n" +
+                "Dolor Sit\n" +
+                "Amet\n" +
+                "\n" +
+                "ALERGENS: \n" +
+                "consectetur adipiscing (1)\n" +
+                "elit sed (7)\n" +
+                "do eiusmod tempor (3)\n");
+        meal1.setPictureUrl("meal-1.jpg");
         mealRepository.save(meal1);
 
         Meal meal2 = new Meal();
         meal2.setName("Pork Chops Romano in Lemon-Butter Sauce");
-        meal2.setDescription("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua." +
-                " Eu volutpat odio facilisis mauris. Donec massa sapien faucibus et molestie ac feugiat. Leo integer malesuada nunc vel risus commodo viverra." +
-                " Sem viverra aliquet eget sit amet. Suscipit tellus mauris a diam maecenas sed enim. Egestas congue quisque egestas diam in." +
-                " Dui nunc mattis enim ut tellus elementum sagittis vitae et. Eu lobortis elementum nibh tellus molestie.");
+        meal2.setDescription("INGREDIENTS:\n" +
+                "Lorem\n" +
+                "Ipsum\n" +
+                "Dolor Sit\n" +
+                "Amet\n" +
+                "\n" +
+                "ALERGENS: \n" +
+                "consectetur adipiscing (1)\n" +
+                "elit sed (7)\n" +
+                "do eiusmod tempor (3)\n");
         mealRepository.save(meal2);
 
         Meal meal3 = new Meal();
         meal3.setName("Fruit Salad with Grilled Chicken and Citrus Poppy Seed Dressing");
-        meal3.setDescription("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua." +
-                " Eu volutpat odio facilisis mauris. Donec massa sapien faucibus et molestie ac feugiat. Leo integer malesuada nunc vel risus commodo viverra." +
-                " Sem viverra aliquet eget sit amet. Suscipit tellus mauris a diam maecenas sed enim. Egestas congue quisque egestas diam in." +
-                " Dui nunc mattis enim ut tellus elementum sagittis vitae et. Eu lobortis elementum nibh tellus molestie." +
-                " Etiam dignissim diam quis enim. Dictum fusce ut placerat orci nulla pellentesque dignissim.");
+        meal3.setDescription("INGREDIENTS:\n" +
+                "Lorem\n" +
+                "Ipsum\n" +
+                "Dolor Sit\n" +
+                "Amet\n" +
+                "\n" +
+                "ALERGENS: \n" +
+                "consectetur adipiscing (1)\n" +
+                "elit sed (7)\n" +
+                "do eiusmod tempor (3)\n");
         meal3.setPictureUrl("https://spoonacular.com/recipeImages/530106-556x370.jpg");
+        meal3.setPictureUrl("meal-3.jpg");
         mealRepository.save(meal3);
 
         Meal meal4 = new Meal();
         meal4.setName("Smoked Salmon Carbonara with Lemon and Dill");
-        meal4.setDescription("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua." +
-                " Eu volutpat odio facilisis mauris. Donec massa sapien faucibus et molestie ac feugiat. Leo integer malesuada nunc vel risus commodo viverra." +
-                " Sem viverra aliquet eget sit amet. Suscipit tellus mauris a diam maecenas sed enim. Egestas congue quisque egestas diam in." +
-                " Dui nunc mattis enim ut tellus elementum sagittis vitae et. Eu lobortis elementum nibh tellus molestie." +
-                " Etiam dignissim diam quis enim. Dictum fusce ut placerat orci nulla pellentesque dignissim. Interdum velit euismod in pellentesque." +
-                " Amet purus gravida quis blandit. Turpis nunc eget lorem dolor sed viverra ipsum nunc.\n" +
+        meal4.setDescription("INGREDIENTS:\n" +
+                "Lorem\n" +
+                "Ipsum\n" +
+                "Dolor Sit\n" +
+                "Amet\n" +
                 "\n" +
-                "Elementum nibh tellus molestie nunc non. Et netus et malesuada fames ac. Convallis posuere morbi leo urna molestie at." +
-                " Libero nunc consequat interdum varius sit. Ante in nibh mauris cursus mattis molestie a iaculis at." +
-                " Eget egestas purus viverra accumsan in nisl nisi scelerisque eu. Nunc mi ipsum faucibus vitae aliquet nec ullamcorper sit." +
-                " Duis ut diam quam nulla porttitor massa id. Est lorem ipsum dolor sit. Massa eget egestas purus viverra accumsan.");
+                "ALERGENS: \n" +
+                "consectetur adipiscing (1)\n" +
+                "elit sed (7)\n" +
+                "do eiusmod tempor (3)\n");
         meal4.setPictureUrl("https://spoonacular.com/recipeImages/783868-556x370.jpg");
+        meal4.setPictureUrl("meal-4.jpg");
         mealRepository.save(meal4);
 
 
         Meal meal5 = new Meal();
-        meal5.setName("Tofu Kabobs with Cherry Barbecue Sauce");
-        meal5.setDescription("Elementum nibh tellus molestie nunc non. Et netus et malesuada fames ac. Convallis posuere morbi leo urna molestie at." +
-                " Libero nunc consequat interdum varius sit. Ante in nibh mauris cursus mattis molestie a iaculis at." +
-                " Eget egestas purus viverra accumsan in nisl nisi scelerisque eu. Nunc mi ipsum faucibus vitae aliquet nec ullamcorper sit." +
-                " Duis ut diam quam nulla porttitor massa id. Est lorem ipsum dolor sit. Massa eget egestas purus viverra accumsan.");
+        meal5.setName("Tofu Kabobs with Barbecue Sauce");
+        meal5.setDescription("INGREDIENTS:\n" +
+                "Lorem\n" +
+                "Ipsum\n" +
+                "Dolor Sit\n" +
+                "Amet\n" +
+                "\n" +
+                "ALERGENS: \n" +
+                "consectetur adipiscing (1)\n" +
+                "elit sed (7)\n" +
+                "do eiusmod tempor (3)\n");
         meal5.setPictureUrl("imageUrl2");
-        mealRepository.save(meal2);
+        meal5.setPictureUrl("meal-5.jpg");
+        mealRepository.save(meal5);
 
         currentVotingRepository.save(new CurrentVoting());
 

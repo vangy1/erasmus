@@ -48,8 +48,7 @@
   <div fxLayout="column" fxLayoutGap="8px" class="content">
     <div fxLayout="row" fxLayoutAlign=" center"
          *ngFor="let voting of adminService.votingHistory | slice:0:getVotingHistoryExpanded(); let i=index">
-      <span class="voting-date" fxFlex="15">
-        {{voting.dateOfTheMeal.getDate()}}.{{voting.dateOfTheMeal.getMonth() + 1}}
+      <span class="voting-date" fxFlex="15">{{voting.dateOfTheMeal.getDate()}}.{{voting.dateOfTheMeal.getMonth() + 1}}
         .{{voting.dateOfTheMeal.getFullYear()}}</span>
       <span class="voting-meal-name overflow-protection" fxFlex="60">{{voting.mealName}}</span>
       <span class="voting-rating" fxFlex="10">{{voting.rating}}</span>
@@ -77,7 +76,8 @@
 
   <div class="content">
     <div fxLayout="row" fxLayoutAlign="center" class="button-manage-meals">
-      <button mat-raised-button color="accent" class="raised-button" (click)="openDialog()">Manage meals</button>
+      <button mat-raised-button color="accent" class="raised-button" (click)="openCreateMealDialog()">Create meal
+      </button>
     </div>
 
     <div fxLayout="column" fxLayoutGap="20px">

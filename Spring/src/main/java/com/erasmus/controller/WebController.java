@@ -32,7 +32,7 @@ public class WebController {
         this.webService = webService;
     }
 
-    @GetMapping("/authentication/info")
+    @GetMapping("/authentication")
     private String getAuthentication() {
         return authenticationService.getAuthentication().toString();
     }
@@ -84,18 +84,18 @@ public class WebController {
         return webService.getVotingHistory(amount);
     }
 
+    @GetMapping("/meal")
+    private List<MealDto> getMeals(@RequestParam(value = "amount", required = false) String amount) {
+        checkAuthentication(new ArrayList<>(Arrays.asList(AuthenticationType.VOTER, AuthenticationType.ADMIN)));
+        return webService.getMeals(amount);
+    }
+
     @PostMapping("/meal")
     private void createMeal(@RequestParam("name") String name,
                             @RequestParam("pictureUrl") String pictureUrl,
                             @RequestParam("description") String description) {
         checkAuthentication(new ArrayList<>(Arrays.asList(AuthenticationType.ADMIN)));
         webService.createMeal(name, pictureUrl, description);
-    }
-
-    @GetMapping("/meal")
-    private List<MealDto> getMeals(@RequestParam(value = "amount", required = false) String amount) {
-        checkAuthentication(new ArrayList<>(Arrays.asList(AuthenticationType.VOTER, AuthenticationType.ADMIN)));
-        return webService.getMeals(amount);
     }
 
     @DeleteMapping("/meal")

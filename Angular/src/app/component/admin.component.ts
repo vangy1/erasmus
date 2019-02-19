@@ -38,7 +38,7 @@ export class AdminComponent {
     })
   }
 
-  openDialog(): void {
+  openCreateMealDialog(): void {
     const dialogRef = this.dialog.open(MealCreationDialogComponent);
   }
 

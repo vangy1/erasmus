@@ -19,28 +19,30 @@ time, mark, audio, video {
   vertical-align: baseline;
 }
 
-
 body {
   font-family: 'Lato', sans-serif;
   background-color: #9E9E9E;
   color: #FFFFFF;
 }
 
-span {
-}
-
 .container {
   padding: 32px 0;
   margin-right: auto;
   margin-left: auto;
-}
-
-.container {
   width: 95%;
+
 }
 
 .form-field-no-top-border .mat-form-field-infix {
   border-top: 0px !important;
+}
+
+.form-field-no-bottom-padding .mat-form-field-wrapper {
+  padding-bottom: 0px !important;
+}
+
+.form-field-no-bottom-padding .mat-form-field-underline {
+  bottom: 0px !important;
 }
 
 .mat-card-decreased-padding {
@@ -51,7 +53,6 @@ span {
   padding: 0px !important;
 }
 
-
 .red-icon svg {
   fill: #B80000;
 }
@@ -60,10 +61,22 @@ span {
   padding: 0;
 }
 
-@media screen and (max-width: 880px) {
+.mat-select-white .mat-select-value-text {
+  color: white !important;
+}
 
+
+.snackbar-without-action .mat-simple-snackbar {
+  text-transform: uppercase;
+  font-weight: bold;
+  justify-content: center;
+  color: white;
+}
+
+
+@media screen and (max-width: 880px) {
   .mat-form-field-login label {
-    font-size: 22px !important;
+    font-size: 24px !important;
   }
 }
 
@@ -89,41 +102,3 @@ span {
   }
 }
 
-.form-field-no-bottom-padding .mat-form-field-wrapper {
-  padding-bottom: 0px !important;
-}
-
-.form-field-no-bottom-padding .mat-form-field-underline {
-  bottom: 0px !important;
-}
-
-.mat-select-white .mat-select-value-text {
-  color: white !important;
-}
-
-
-.snackbar-without-action .mat-simple-snackbar {
-  text-transform: uppercase;
-  font-weight: bold;
-  justify-content: center;
-  color: white;
-}
-
-input[type="color"],
-input[type="date"],
-input[type="datetime"],
-input[type="datetime-local"],
-input[type="email"],
-input[type="month"],
-input[type="number"],
-input[type="password"],
-input[type="search"],
-input[type="tel"],
-input[type="text"],
-input[type="time"],
-input[type="url"],
-input[type="week"],
-select:focus,
-textarea {
-  font-size: 16px;
-}

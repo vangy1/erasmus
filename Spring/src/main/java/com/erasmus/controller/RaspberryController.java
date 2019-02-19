@@ -3,6 +3,7 @@ package com.erasmus.controller;
 
 import com.erasmus.authentication.AuthenticationService;
 import com.erasmus.dto.RaspberryDto;
+import com.erasmus.dto.UserDto;
 import com.erasmus.service.RaspberryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -29,4 +30,11 @@ public class RaspberryController {
     private RaspberryDto vote(@RequestHeader("Authorization") String authorization, @RequestParam("rating") String rating) {
         return raspberryService.vote(authorization, rating);
     }
+
+    @GetMapping("/voter")
+    private UserDto getUser(@RequestHeader("Authorization") String authorization) {
+        return raspberryService.getUser(authorization);
+
+    }
 }
+

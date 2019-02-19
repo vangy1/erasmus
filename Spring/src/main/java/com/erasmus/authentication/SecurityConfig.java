@@ -39,11 +39,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.authorizeRequests().antMatchers("/", "/login-submit", "/login", "/logout").permitAll();
+        http.authorizeRequests().antMatchers("/", "/authentication", "/login", "/logout").permitAll();
 
         http.csrf().disable();
         http.authorizeRequests().and().formLogin()//
-                .loginProcessingUrl("/login-submit") // Submit URL
+                .loginProcessingUrl("/authentication") // Submit URL
                 .loginPage("/login").successHandler((request, response, authentication) -> {
             User user = userRepository.findByUsername(authentication.getName());
             if (user instanceof Admin) {

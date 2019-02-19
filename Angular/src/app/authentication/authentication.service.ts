@@ -22,7 +22,7 @@ export class AuthenticationService {
   }
 
   checkIfSignedIn() {
-    this.http.get(environment.apiUrl + '/authentication/info', {
+    this.http.get(environment.apiUrl + '/authentication', {
       withCredentials: true,
       responseType: 'text'
     }).subscribe((authentication) => {

@@ -14,7 +14,7 @@ public class StorageService {
     @Value("${location.image-folder}")
     String imageFolderLocation;
 
-    public void storePicture(MultipartFile picture, String filename) throws IOException {
+    void storePicture(MultipartFile picture, String filename) throws IOException {
         createFolderIfNeeded(Paths.get("resources"));
 
         Path imageFolder = Paths.get(imageFolderLocation);

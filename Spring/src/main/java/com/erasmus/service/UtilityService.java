@@ -10,6 +10,7 @@ import com.erasmus.dto.VotingDto;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -40,18 +41,23 @@ public class UtilityService {
         return votingsDto;
     }
 
-    public String getRatingOfVoting(Voting voting) {
-        String rating = null;
-        List<Vote> votes = voting.getVotes();
-        if (!votes.isEmpty()) {
-            double ratingSum = 0;
-            for (Vote vote : votes) {
-                ratingSum += vote.getRating();
+    public String getRatingOfMeal(Meal meal) {
+        String mealRating = null;
+        double mealRatingSum = 0;
+        int votingCount = 0;
+        List<Voting> votings = meal.getVotings();
+        for (Voting voting : votings) {
+            String rating = getRatingOfVoting(voting);
+            if (rating != null) {
+                mealRatingSum += Double.parseDouble(rating);
+                votingCount += 1;
             }
-
-            rating = String.valueOf(ratingSum / votes.size());
         }
-        return rating;
+        if (votingCount != 0) {
+            mealRating = String.valueOf(mealRatingSum / votingCount);
+        }
+
+        return mealRating != null ? new DecimalFormat("#.0#").format(Double.parseDouble(mealRating)) : null;
     }
 
     public List<MealDto> transformMealsIntoDto(List<Meal> meals) {
@@ -71,22 +77,17 @@ public class UtilityService {
         return mealsDto;
     }
 
-    public String getRatingOfMeal(Meal meal) {
-        String mealRating = null;
-        double mealRatingSum = 0;
-        int votingCount = 0;
-        List<Voting> votings = meal.getVotings();
-        for (Voting voting : votings) {
-            String rating = getRatingOfVoting(voting);
-            if (rating != null) {
-                mealRatingSum += Double.parseDouble(rating);
-                votingCount += 1;
+    public String getRatingOfVoting(Voting voting) {
+        String rating = null;
+        List<Vote> votes = voting.getVotes();
+        if (!votes.isEmpty()) {
+            double ratingSum = 0;
+            for (Vote vote : votes) {
+                ratingSum += vote.getRating();
             }
-        }
-        if (votingCount != 0) {
-            mealRating = String.valueOf(mealRatingSum / votingCount);
-        }
 
-        return mealRating;
+            rating = String.valueOf(ratingSum / votes.size());
+        }
+        return rating != null ? new DecimalFormat("#.0#").format(Double.parseDouble(rating)) : null;
     }
 }

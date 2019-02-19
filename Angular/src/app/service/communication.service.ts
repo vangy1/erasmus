@@ -194,7 +194,6 @@ export class CommunicationService {
   }
 
   private currentVotingFromJson(currentVotingJsonObject) {
-    console.log(currentVotingJsonObject)
     if (currentVotingJsonObject) {
       this.currentVoting = new Voting(currentVotingJsonObject);
     } else {

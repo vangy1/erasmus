@@ -19,6 +19,6 @@ export class LoginService {
       withCredentials: true
     };
 
-    return this.http.post(environment.apiUrl + '/login-submit', formData, httpOptions)
+    return this.http.post(environment.apiUrl + '/authentication', formData, httpOptions)
   }
 }
